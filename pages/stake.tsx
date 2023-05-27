@@ -20,7 +20,12 @@ import {
 import styles from "../styles/Home.module.css";
 
 const Stake: NextPage = () => {
+
   const address = useAddress();
+
+  console.log("address",address);
+  
+
   const { contract: nftDropContract } = useContract(
     nftDropContractAddress,
     "nft-drop"
@@ -36,19 +41,21 @@ const Stake: NextPage = () => {
   const { data: stakedTokens } = useContractRead(
     contract,
     "getStakeInfo",
-    address
+    [address]
   );
 
   useEffect(() => {
     if (!contract || !address) return;
 
     async function loadClaimableRewards() {
-      const stakeInfo = await contract?.call("getStakeInfo", address);
+      const stakeInfo = await contract?.call("getStakeInfo", [address]);
+      ////const stakeInfo = await contract?.call("getStakeInfo", );
       setClaimableRewards(stakeInfo[1]);
     }
 
     loadClaimableRewards();
   }, [address, contract]);
+
 
   async function stakeNft(id: string) {
     if (!address) return;

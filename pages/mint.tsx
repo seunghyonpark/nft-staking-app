@@ -18,8 +18,8 @@ const Mint: NextPage = () => {
       <hr className={`${styles.smallDivider} ${styles.detailPageHr}`} />
 
       <Web3Button
-        colorMode="dark"
-        accentColor="#5204BF"
+        //colorMode="dark"
+        //accentColor="#5204BF"
         contractAddress={nftDropContractAddress}
         action={(contract) => contract.erc721.claim(1)}
         onSuccess={() => {
